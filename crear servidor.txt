@@ -1,0 +1,15 @@
+python -m SimpleHTTPServer
+
+
+
+            <firebase-collection
+              location="https://partyxpress.firebaseio.com/usuarios"
+              data="{{users}}"></firebase-collection>
+            <template is="dom-repeat" items="[[users]]" as="usuario">
+              <h4>[[usuario.__firebaseKey__]]</h4>
+
+              <template is="dom-repeat" items="[[usuario.gustos.item1]]" as="gusto">
+                <p>
+                  [[gusto.name]]
+                </p>
+

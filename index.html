@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Party Xpress</title>
+  <meta name="description" content="">
+
+  <!-- Mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Chrome / Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="black">
+  <link rel="icon" href="icon.png">
+
+  <!-- Safari / iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon-precomposed" href="apple-touch-icon.png">
+
+  <!-- Web Components -->
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="elements.html">
+  <link rel="import" href="styles.html">
+  <style is="custom-style" include="iron-flex iron-flex-alignment"></style>
+</head>
+
+<body unresolved>
+  <template is="dom-bind">
+    <paper-drawer-panel force-narrow disable-swipe>
+      <paper-header-panel drawer>
+        <div id="cuadro">
+          <img id="user" src="images/userUno.png"></img>
+        </div>
+        <paper-menu selected="{{selected}}" id="menu">
+          <paper-item>Login</paper-item>
+          <paper-item>Registro</paper-item>
+          <paper-item>
+            <iron-icon icon="home"></iron-icon>
+            <div>Home</div>
+          </paper-item>
+          <paper-item>
+            <iron-icon icon="maps:directions-bus"></iron-icon>
+            <div>Domicilios</div>
+          </paper-item>
+          <paper-item>
+            <iron-icon icon="social:notifications"></iron-icon>
+            <div>Notificaciones</div>
+          </paper-item>
+          <paper-item>
+            <iron-icon icon="event"></iron-icon>
+            <div>Eventos</div>
+          </paper-item>
+          <paper-item>
+            <iron-icon icon="places:casino"></iron-icon>
+            <div>Juegos</div>
+          </paper-item>
+          <paper-item>
+            <iron-icon icon="settings"></iron-icon>
+            <div>Ajustes</div>
+          </paper-item>
+        </paper-menu>
+      </paper-header-panel>
+
+      <paper-header-panel id="panel" main>
+        <iron-pages selected="{{selected}}">
+          <section id="login_screen" class="layout vertical center-center">
+            <firebase-auth
+              id="firebaseAuth"
+              location="https://partyxpress.firebaseio.com"
+              provider="password">
+            </firebase-auth>
+            <iron-image sizing="cover" id="fondo" src="images/partyUno.jpg"></iron-image>
+            <img id="images" src="images/logoParty1.png"></img>
+            <div id="input" class="layout vertical center">
+              <paper-input auto-validate label="Usuario/e-mail" type="email" value="{{user}}" required error-message="Campo requerido" ></paper-input>
+              <paper-input id="pass_input" auto-validate label="Contraseña" type="password" required error-message="Campo requerido" value="{{password}}"></paper-input>
+              <paper-button id="sign_in_button" onclick="sign_in()">Entrar</paper-button>
+              <paper-button id="sign_up_button" onclick="ir_a_registro()">Registrarse</paper-button>
+            </div>
+          </section>
+
+          <section id="sign_up_screen" class="layout vertical center-center">
+            <iron-image sizing="cover" id="fondo" src="images/partyUno.jpg"></iron-image>
+            <img id="images" src="images/logoParty1.png"></img>
+            <div id="input" class="layout vertical center">
+              <paper-input auto-validate required error-message="Campo requerido" label="Nombre"></paper-input>
+              <paper-input auto-validate required error-message="Campo requerido" type="email" label="E-mail" value="{{new_email}}"></paper-input>
+              <paper-input id="pass_input2" auto-validate required error-message="Campo requerido" label="Contraseña" value="{{new_password}}" type="password"></paper-input>
+              <paper-checkbox>Certifico que soy mayor de edad y he leido los terminos y condiciones de uso</paper-checkbox>
+              <paper-button id="sign_in_button" onclick="registrar()">Siguiente</paper-button>
+            </div>
+            <paper-toast id="user_toast" text="Usuario creado con éxito" duration="2500"></paper-toast>
+          </section>
+
+          <section id="other_screen">
+            <paper-toolbar class="purple">
+              <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
+              <div> Hola {{user}} </div>
+            </paper-toolbar>
+          </section>
+
+          <section id="other_screen">
+            <paper-toolbar class="purple">
+              <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
+              <div> Domicilios </div>
+            </paper-toolbar>
+          </section>
+
+          <section id="other_screen">
+            <paper-toolbar class="purple">
+              <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
+              <div> Notificaciones </div>
+            </paper-toolbar>
+          </section>
+
+          <section id="other_screen">
+            <paper-toolbar class="purple">
+              <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
+              <div> Eventos </div>
+            </paper-toolbar>
+
+
+
+            <div  id="iconos" class="layout vertical center">
+
+              <iron-icon icon="communication:location-on"></iron-icon>
+
+              <paper-input label="Donde es el parche"></paper-input>
+
+
+              <img id="images" src="images/calendario.jpg"></img>
+
+              <div class="layout horizontal center">
+                <iron-icon icon="social:people"></iron-icon>
+                <iron-icon icon="notification:disc-full"></iron-icon>
+                <iron-icon icon="notification:event-available"></iron-icon>
+                <iron-icon icon="image:add-a-photo"></iron-icon>
+
+              </div>
+
+
+
+
+
+              <paper-button id="sign_in_button" onclick=window.open("https://docs.google.com/forms/d/1S6XM8aR0eMbJGaE4kDVA1eJv0i8blfn60LDgCDFNjkA/viewform")>Crear Evento</paper-button>
+
+
+
+
+
+
+            </div>
+
+            <div id="input" class="layout vertical center">
+
+
+
+            </div>
+
+
+
+
+          </section>
+
+          <section id="other_screen">
+            <paper-toolbar class="purple">
+              <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
+              <div> Juegos </div>
+            </paper-toolbar>
+          </section>
+
+          <section id="other_screen">
+            <paper-toolbar class="purple">
+              <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
+              <div> Ajustes </div>
+            </paper-toolbar>
+
+            <div id="input" class="layout vertical center">
+            <paper-button id="sign_in_button" onclick="sign_out()">Logout</paper-button>
+            </div>
+          </section>
+
+
+
+
+
+        </iron-pages>
+      </paper-header-panel>
+    </paper-drawer-panel>
+  </template>
+
+  <script src="app.js"></script>
+
+</body>
+
+</html>
